@@ -39,9 +39,9 @@ src/
   entities/math-topic/model/# типы, операции над графом, адаптер Markdown
 data/math-graph.ts          # термины, разделы, связи
 content/                   # Markdown-материалы; «Числа» — пример оформления
-scripts/                   # выпуск версии и проверка имён
+scripts/                   # проверка имён
 tests/                     # unit и браузерные проверки
-.github/workflows/ci.yml    # CI и выпуск GitHub Release по тегу
+.github/workflows/ci.yml    # проверки и сборка при push
 ```
 
 Файлы и каталоги имеют имена в `kebab-case`, компоненты — в `PascalCase`. Имена служебных файлов вроде `README.md` соответствуют общепринятым соглашениям. Проверка имён включена в CI.
@@ -83,21 +83,11 @@ React Flow отображает граф, Dagre вычисляет иерарх�
 
 Доступные типы: `prerequisite`, `related`, `uses`, `contains`. Основные зависимости показаны сплошными линиями, остальные — пунктиром. Циклы в зависимостях, отсутствующие темы и материалы проверяются тестами.
 
-## Выпуск версии и push
+## GitHub Actions
 
-Сначала создайте Git-репозиторий, настройте `origin`, опубликуйте ветку и установите браузер для тестов. Рабочее дерево должно быть чистым, локальная ветка — совпадать с веткой в `origin`.
+После обычного `git push` в любую ветку GitHub Actions запускает проверку форматирования, имён файлов, unit-тесты, сборку и браузерные тесты.
 
-```sh
-npm run release -- patch --dry-run
-npm run release -- patch
-npm run release -- minor
-npm run release -- major
-npm run release -- 1.2.0
-```
-
-Скрипт проверяет Git, версии и отсутствие тега, запускает `check` и браузерные тесты, обновляет `package.json` и `package-lock.json`, создаёт коммит и аннотированный тег `vX.Y.Z`, отправляет ветку и тег одной командой `git push --atomic`. Force push не используется. При ошибке push локальный коммит и тег сохраняются; скрипт выводит команду повторной отправки. `--dry-run` выполняет предварительные проверки, не меняет файлы и не делает push.
-
-GitHub Actions проверяет изменения в ветках и pull request. Для тегов `v*` после успешных проверок создаёт GitHub Release с архивом `mathgraph.tar.gz`. Развёртывание сайта не настроено. Основа workflow: [документация GitHub Actions для Node.js](https://docs.github.com/en/actions/tutorials/build-and-test-code/nodejs) и [GitHub CLI release create](https://cli.github.com/manual/gh_release_create).
+Готовая сборка `dist/` доступна в артефактах запуска как `mathgraph-<commit>`. При ошибке сохраняется отчёт Playwright. Развёртывание сайта не настроено.
 
 Для размещения `dist/` на сервере нужен fallback на `index.html`. Дальше можно расширять набор терминов и подключить backend через адаптер данных, сохранив текущий интерфейс.
 
