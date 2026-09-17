@@ -21,7 +21,7 @@ export function Sidebar({ category, activeTopic, onCategory, onTopic }: Props) {
   return (
     <aside className="sidebar">
       <button className="brand" onClick={() => onCategory('algebra')} aria-label="MathGraph">
-        <img src="/favicon.svg" alt="" />
+        <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" />
         <span>MathGraph</span>
       </button>
       <div className="sidebar-label">Разделы</div>

@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH },
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: 'http://127.0.0.1:4175/math-graph/',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
@@ -21,9 +21,9 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' } },
   ],
   webServer: {
-    command: 'npm run dev -- --port 4173 --strictPort',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: !process.env.CI,
+    command: 'npm run preview -- --port 4175 --strictPort',
+    url: 'http://127.0.0.1:4175/math-graph/',
+    reuseExistingServer: false,
     timeout: 60000,
   },
 });

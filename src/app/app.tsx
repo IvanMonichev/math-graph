@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ConfigProvider, Spin } from 'antd';
 import ruRU from 'antd/locale/ru_RU';
 const MapPage = lazy(() =>
@@ -34,7 +34,7 @@ export function App() {
         },
       }}
     >
-      <BrowserRouter>
+      <HashRouter>
         <Suspense
           fallback={
             <div className="app-loading">
@@ -48,7 +48,7 @@ export function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
-      </BrowserRouter>
+      </HashRouter>
     </ConfigProvider>
   );
 }

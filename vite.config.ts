@@ -6,6 +6,7 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
   version: string;
 };
 export default defineConfig({
+  base: '/math-graph/',
   plugins: [react()],
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
 });
