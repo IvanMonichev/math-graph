@@ -1,0 +1,49 @@
+{
+  "name": "mathgraph",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run tests/unit",
+    "test:e2e": "playwright test",
+    "release": "node scripts/release.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "naming:check": "node scripts/check-naming.mjs",
+    "check": "npm run format:check && npm run naming:check && npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@ant-design/icons": "^6.3.4",
+    "@dagrejs/dagre": "^3.1.1",
+    "@xyflow/react": "^12.11.6",
+    "antd": "^6.6.4",
+    "katex": "^0.18.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.4",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/katex": "^0.16.8",
+    "@types/node": "^22.20.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "prettier": "^3.9.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}
